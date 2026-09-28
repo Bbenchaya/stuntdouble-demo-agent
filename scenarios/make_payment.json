@@ -1,0 +1,30 @@
+{
+  "scenario_id": "pay_bill",
+  "mocks": {
+    "get_bill_details": [
+      {
+        "input": {"bill_id": {"$regex": "^BILL"}},
+        "output": {"id": "{{input.bill_id}}", "amount": 4500, "status": "overdue"}
+      }
+    ],
+    "make_payment": [
+      {
+        "input": {"amount": {"$gte": 1000}},
+        "output": {
+          "payment_id": "{{uuid}}",
+          "status": "processing",
+          "amount": "{{input.amount}}",
+          "processed_at": "{{now}}"
+        }
+      },
+      {
+        "output": {
+          "payment_id": "{{uuid}}",
+          "status": "completed",
+          "amount": "{{input.amount}}",
+          "processed_at": "{{now}}"
+        }
+      }
+    ]
+  }
+}

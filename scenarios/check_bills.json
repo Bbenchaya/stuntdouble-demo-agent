@@ -1,0 +1,25 @@
+{
+  "scenario_id": "check_overdue_bills",
+  "mocks": {
+    "get_customer": [
+      {
+        "input": {"customer_id": "CUST-001"},
+        "output": {"id": "CUST-001", "name": "Acme Corp", "tier": "enterprise"}
+      }
+    ],
+    "list_bills": [
+      {
+        "input": {"status": "overdue"},
+        "output": {
+          "bills": [
+            {"id": "{{sequence('BILL')}}", "amount": 4500, "due_date": "{{now - 14d}}"},
+            {"id": "{{sequence('BILL')}}", "amount": 1200, "due_date": "{{now - 7d}}"}
+          ]
+        }
+      },
+      {
+        "output": {"bills": []}
+      }
+    ]
+  }
+}

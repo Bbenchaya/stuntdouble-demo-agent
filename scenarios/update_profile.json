@@ -1,0 +1,24 @@
+{
+  "scenario_id": "update_customer_profile",
+  "mocks": {
+    "get_profile": [
+      {
+        "output": {
+          "customer_id": "CUST-001",
+          "email": "old@acme.com",
+          "phone": "555-0100",
+          "address": "123 Main St"
+        }
+      }
+    ],
+    "update_profile": [
+      {
+        "output": {
+          "status": "updated",
+          "updated_at": "{{now}}",
+          "fields_changed": ["email"]
+        }
+      }
+    ]
+  }
+}
